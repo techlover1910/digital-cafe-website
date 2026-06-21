@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Café Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <nav class="nav container">
+      <a href="#home" class="logo">DigitalCafe<span>Pro</span></a>
+      <div class="nav-links">
+        <a href="#features">Tools</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#benefits">Benefits</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="#contact" class="btn btn-primary">Request Demo</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">Cyber Café • CSC • Photo Services</p>
+          <h1>Digital shop ka smart workflow, ek click mein.</h1>
+          <p class="hero-text">Passport photo, PVC ID, PDF tools, form resizing aur billing — sab kuch ek hi platform par.</p>
+          <div class="hero-actions">
+            <a href="#features" class="btn btn-primary">Tools Dekho</a>
+            <a href="#workflow" class="btn btn-secondary">Kaise kaam karta hai</a>
+          </div>
+          <div class="stats">
+            <div>
+              <strong>9+</strong>
+              <span>Core Tools</span>
+            </div>
+            <div>
+              <strong>3x</strong>
+              <span>Faster Service</span>
+            </div>
+            <div>
+              <strong>100%</strong>
+              <span>Digital Ready</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="hero-panel-card">
+            <div class="panel-top">
+              <span>Today’s Queue</span>
+              <span>12 tasks</span>
+            </div>
+            <div class="panel-progress">
+              <div></div>
+            </div>
+            <div class="panel-list">
+              <div><span>Photo print</span><strong>05</strong></div>
+              <div><span>ID crop</span><strong>03</strong></div>
+              <div><span>Form resize</span><strong>02</strong></div>
+              <div><span>Receipt</span><strong>02</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="highlights">
+      <div class="container highlights-grid">
+        <div class="highlight-card">
+          <h3>⚡ Fast Processing</h3>
+          <p>Har request ka output ek hi dashboard se ready.</p>
+        </div>
+        <div class="highlight-card">
+          <h3>📄 Accurate Formatting</h3>
+          <p>Government portals aur print sizes ke hisaab se exact output.</p>
+        </div>
+        <div class="highlight-card">
+          <h3>🧾 Easy Billing</h3>
+          <p>Instant receipt generation aur customer-friendly invoices.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Required Tools</p>
+          <h2>Digital shop ke liye advanced solutions</h2>
+        </div>
+        <div class="tool-grid" id="tool-grid"></div>
+      </div>
+    </section>
+
+    <section class="workflow" id="workflow">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Workflow</p>
+          <h2>3 simple steps, perfect output</h2>
+        </div>
+        <div class="workflow-grid">
+          <div class="workflow-card">
+            <span>01</span>
+            <h3>Upload</h3>
+            <p>Photo, PDF, ya document upload karein.</p>
+          </div>
+          <div class="workflow-card">
+            <span>02</span>
+            <h3>Auto Fix</h3>
+            <p>Resize, crop, merge, aur clean karna automatic.</p>
+          </div>
+          <div class="workflow-card">
+            <span>03</span>
+            <h3>Print / Save</h3>
+            <p>Ready output ko print ya digital form mein save karein.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace" id="workspace">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Tool Workspace</p>
+          <h2>Working tools for real shop use</h2>
+        </div>
+        <div class="workspace-grid">
+          <div class="workspace-panel">
+            <h3>Passport Photo Maker</h3>
+            <form id="passport-form" class="tool-form" data-result="passport-result">
+              <input type="file" id="passport-input" name="image" accept="image/*" required />
+              <label for="passport-format">Output Type</label>
+              <select id="passport-format" name="format">
+                <option value="jpg" selected>JPG</option>
+                <option value="pdf">PDF</option>
+              </select>
+              <label for="passport-sheet">Sheet / Layout</label>
+              <select id="passport-sheet" name="sheet">
+                <option value="">Single</option>
+                <option value="6">6-up sheet</option>
+                <option value="12">12-up sheet</option>
+                <option value="4x6">4x6 layout</option>
+                <option value="a4">A4 layout</option>
+              </select>
+              <label style="display:block; font-size:0.9rem; margin-bottom:8px;"><input type="checkbox" id="passport-single-download" name="single_download" value="1"> Direct single download</label>
+              <button type="submit">Process Photo</button>
+            </form>
+            <div class="result-area" id="passport-result">
+              <p class="result-text">No output yet</p>
+            </div>
+          </div>
+
+          <div class="workspace-panel">
+            <h3>PDF Converter</h3>
+            <form id="convert-form" class="tool-form" data-result="convert-result">
+              <input type="file" id="convert-input" name="file" accept=".pdf,image/*" required />
+              <select id="convert-mode" name="mode">
+                <option value="pdf-to-jpg">PDF → JPG</option>
+                <option value="jpg-to-pdf">JPG → PDF</option>
+              </select>
+              <button type="submit">Convert</button>
+            </form>
+            <div class="result-area" id="convert-result">
+              <p class="result-text">No output yet</p>
+            </div>
+          </div>
+
+          <div class="workspace-panel">
+            <h3>Resize Tool</h3>
+            <form id="resize-form" class="tool-form" data-result="resize-result">
+              <input type="file" id="resize-input" name="file" accept="image/*,.pdf" required />
+              <input type="number" id="resize-width" name="width" placeholder="Width" min="1" />
+              <input type="number" id="resize-height" name="height" placeholder="Height" min="1" />
+              <input type="number" id="resize-kb" name="target_kb" placeholder="Target KB" min="1" />
+              <button type="submit">Resize</button>
+            </form>
+            <div class="result-area" id="resize-result">
+              <p class="result-text">No output yet</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="benefits" id="benefits">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Benefits</p>
+          <h2>Is website se kya fayda?</h2>
+        </div>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <h3>Fast Service</h3>
+            <p>Har request ke liye ek hi dashboard se quick action.</p>
+          </div>
+          <div class="benefit-card">
+            <h3>Less Errors</h3>
+            <p>Preset sizes aur auto-format se galti kam hoti hai.</p>
+          </div>
+          <div class="benefit-card">
+            <h3>Customer Trust</h3>
+            <p>Professional bill, clean outputs, aur smooth printing experience.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container contact-box">
+        <div>
+          <p class="eyebrow">Ready to Launch</p>
+          <h2>Apni digital shop ke liye website chahiye?</h2>
+        </div>
+        <a href="mailto:info@digitalcafesolutions.com" class="btn btn-primary">Contact Now</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© 2026 DigitalCafePro</p>
+      <a href="#home">Back to top</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="frontend.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+      // Determine backend base URL: fall back to localhost:5000 when opened locally
+      const API_BASE = (window.location.protocol === 'file:' || !window.location.hostname)
+          ? 'http://localhost:5000'
+          : window.location.origin;
+      
+      // 1. Passport photo form ko backend se connect karna
+      const passportForm = document.getElementById('passport-form');
+      if (passportForm) {
+          passportForm.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              
+              const submitBtn = passportForm.querySelector('button');
+              const resultArea = document.getElementById('passport-result');
+              const fileInput = document.getElementById('passport-input');
+
+              if (!fileInput.files[0]) {
+                  alert("कृपया पहले 'Choose File' पर क्लिक करके एक फोटो सेलेक्ट करें!");
+                  return;
+              }
+
+              const formatSelect = document.getElementById('passport-format');
+              const sheetSelect = document.getElementById('passport-sheet');
+              const singleCheckbox = document.getElementById('passport-single-download');
+
+              const formData = new FormData();
+              formData.append('image', fileInput.files[0]);
+              formData.append('format', formatSelect.value);
+              if (sheetSelect.value) formData.append('sheet', sheetSelect.value);
+              formData.append('dpi', '300');
+              formData.append('download', singleCheckbox.checked ? 'single' : 'zip');
+
+              try {
+                  submitBtn.innerText = "Processing (कृपया रुकें)...";
+                  submitBtn.disabled = true;
+                  resultArea.innerHTML = `<p style="color: #eab308; font-weight: bold; padding: 10px;">⏳ फोटो क्रॉप हो रही है, कृपया इंतजार करें...</p>`;
+
+                    const response = await fetch(`${API_BASE}/process-photo`, {
+                      method: 'POST',
+                      body: formData
+                    });
+
+                    if (!response.ok) throw new Error("सर्वर से गड़बड़ रिस्पॉन्स मिला");
+
+                    const contentType = response.headers.get('content-type') || '';
+                    const blob = await response.blob();
+                    const url = URL.createObjectURL(blob);
+
+                    if (contentType.includes('application/zip')) {
+                      resultArea.innerHTML = `
+                        <div style="margin-top: 15px; text-align: center; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #cbd5e1;">
+                          <p style="color: #22c55e; font-weight: bold; margin-bottom: 10px;">✓ Outputs Ready!</p>
+                          <a href="${url}" download="passport_outputs.zip" style="background: #22c55e; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: bold; width: 100%; text-align: center;">Download ZIP</a>
+                        </div>
+                      `;
+                    } else if (contentType.includes('application/pdf')) {
+                      resultArea.innerHTML = `
+                        <div style="margin-top: 15px; text-align: center; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #cbd5e1;">
+                          <p style="color: #22c55e; font-weight: bold; margin-bottom: 10px;">✓ PDF Ready!</p>
+                          <iframe src="${url}" style="width:100%;height:220px;border:2px solid #cbd5e1;border-radius:6px;margin-bottom:10px;"></iframe>
+                          <br>
+                          <a href="${url}" download="passport.pdf" style="background: #22c55e; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: bold; width: 100%; text-align: center;">Download PDF</a>
+                        </div>
+                      `;
+                    } else if (contentType.includes('image')) {
+                      resultArea.innerHTML = `
+                        <div style="margin-top: 15px; text-align: center; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #cbd5e1;">
+                          <p style="color: #22c55e; font-weight: bold; margin-bottom: 10px;">✓ Image Ready!</p>
+                          <img src="${url}" style="max-width: 100%; border: 2px solid #cbd5e1; border-radius: 8px; margin-bottom: 12px;">
+                          <br>
+                          <a href="${url}" download="passport.jpg" style="background: #22c55e; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: bold; width: 100%; text-align: center;">Download</a>
+                        </div>
+                      `;
+                    } else {
+                      resultArea.innerHTML = `<p style="color: #ef4444; font-weight: bold; padding: 10px;">❌ Unknown response type: ${contentType}</p>`;
+                    }
+
+              } catch (err) {
+                  alert("कनेक्शन एरर: चेक करें कि टर्मिनल में 'python app.py' (Port 5000) चल रहा है या नहीं।");
+                  resultArea.innerHTML = `<p style="color: #ef4444; font-weight: bold; padding: 10px;">❌ बैकएंड सर्वर कनेक्ट नहीं हो पाया।</p>`;
+                  console.error(err);
+              } finally {
+                  submitBtn.innerText = "Process Photo";
+                  submitBtn.disabled = false;
+              }
+          });
+      }
+
+      // 2. PDF Convert form handler
+      const convertForm = document.getElementById('convert-form');
+      if (convertForm) {
+          convertForm.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              
+              const submitBtn = convertForm.querySelector('button');
+              const resultArea = document.getElementById('convert-result');
+              const fileInput = document.getElementById('convert-input');
+              const modeSelect = document.getElementById('convert-mode');
+
+              if (!fileInput.files[0]) {
+                  alert("कृपया फाइल सेलेक्ट करें!");
+                  return;
+              }
+
+              const formData = new FormData();
+              formData.append('file', fileInput.files[0]);
+              formData.append('mode', modeSelect.value);
+
+              try {
+                  submitBtn.innerText = "Converting...";
+                  submitBtn.disabled = true;
+                  resultArea.innerHTML = `<p style="color: #eab308; font-weight: bold; padding: 10px;">⏳ फाइल convert हो रही है...</p>`;
+
+                  const response = await fetch(`${API_BASE}/api/convert`, {
+                      method: 'POST',
+                      body: formData
+                  });
+
+                  if (!response.ok) throw new Error("कनवर्शन फेल हुआ");
+
+                  const blob = await response.blob();
+                  const url = URL.createObjectURL(blob);
+                  const isPDF = blob.type.includes('pdf');
+
+                  if (isPDF) {
+                      resultArea.innerHTML = `
+                          <div style="margin-top: 15px; text-align: center; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #cbd5e1;">
+                              <p style="color: #22c55e; font-weight: bold; margin-bottom: 10px;">✓ PDF Ready!</p>
+                              <iframe src="${url}" style="width:100%;height:220px;border:2px solid #cbd5e1;border-radius:6px;margin-bottom:10px;"></iframe>
+                              <br>
+                              <a href="${url}" download="converted.pdf" style="background: #22c55e; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: bold; width: 100%; text-align: center;">Download PDF</a>
+                          </div>
+                      `;
+                  } else {
+                      resultArea.innerHTML = `
+                          <div style="margin-top: 15px; text-align: center; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #cbd5e1;">
+                              <p style="color: #22c55e; font-weight: bold; margin-bottom: 10px;">✓ JPG Ready!</p>
+                              <img src="${url}" style="max-width: 100%; max-height: 220px; border: 2px solid #cbd5e1; border-radius: 8px; margin-bottom: 12px;">
+                              <br>
+                              <a href="${url}" download="converted.jpg" style="background: #22c55e; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: bold; width: 100%; text-align: center;">Download JPG</a>
+                          </div>
+                      `;
+                  }
+
+              } catch (err) {
+                  alert("कनेक्शन एरर: backend server check करें");
+                  resultArea.innerHTML = `<p style="color: #ef4444; font-weight: bold; padding: 10px;">❌ Error: ${err.message}</p>`;
+                  console.error(err);
+              } finally {
+                  submitBtn.innerText = "Convert";
+                  submitBtn.disabled = false;
+              }
+          });
+      }
+
+      // 3. Resize form handler
+      const resizeForm = document.getElementById('resize-form');
+      if (resizeForm) {
+          resizeForm.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              
+              const submitBtn = resizeForm.querySelector('button');
+              const resultArea = document.getElementById('resize-result');
+              const fileInput = document.getElementById('resize-input');
+              const widthInput = document.getElementById('resize-width');
+              const heightInput = document.getElementById('resize-height');
+              const kbInput = document.getElementById('resize-kb');
+
+              if (!fileInput.files[0]) {
+                  alert("कृपया फाइल सेलेक्ट करें!");
+                  return;
+              }
+
+              if (!widthInput.value && !heightInput.value) {
+                  alert("कम से कम Width या Height देना जरूरी है!");
+                  return;
+              }
+
+              const formData = new FormData();
+              formData.append('file', fileInput.files[0]);
+              if (widthInput.value) formData.append('width', widthInput.value);
+              if (heightInput.value) formData.append('height', heightInput.value);
+              if (kbInput.value) formData.append('target_kb', kbInput.value);
+
+              try {
+                  submitBtn.innerText = "Resizing...";
+                  submitBtn.disabled = true;
+                  resultArea.innerHTML = `<p style="color: #eab308; font-weight: bold; padding: 10px;">⏳ इमेज resize हो रही है...</p>`;
+
+                  const response = await fetch(`${API_BASE}/api/resize`, {
+                      method: 'POST',
+                      body: formData
+                  });
+
+                  if (!response.ok) throw new Error("Resize फेल हुआ");
+
+                  const blob = await response.blob();
+                  const url = URL.createObjectURL(blob);
+
+                  resultArea.innerHTML = `
+                      <div style="margin-top: 15px; text-align: center; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #cbd5e1;">
+                          <p style="color: #22c55e; font-weight: bold; margin-bottom: 10px;">✓ Resized Image Ready!</p>
+                          <img src="${url}" style="max-width: 100%; max-height: 220px; border: 2px solid #cbd5e1; border-radius: 8px; margin-bottom: 12px;">
+                          <br>
+                          <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 10px;">Size: ${(blob.size / 1024).toFixed(2)} KB</p>
+                          <a href="${url}" download="resized.jpg" style="background: #22c55e; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: bold; width: 100%; text-align: center;">Download Image</a>
+                      </div>
+                  `;
+
+              } catch (err) {
+                  alert("कनेक्शन एरर: backend server check करें");
+                  resultArea.innerHTML = `<p style="color: #ef4444; font-weight: bold; padding: 10px;">❌ Error: ${err.message}</p>`;
+                  console.error(err);
+              } finally {
+                  submitBtn.innerText = "Resize";
+                  submitBtn.disabled = false;
+              }
+          });
+      }
+
+      // 4. Smart feature: Tool cards par click karne se Workspace tak auto scroll hona
+      const toolGrid = document.getElementById('tool-grid');
+      if (toolGrid) {
+          toolGrid.addEventListener('click', () => {
+              const workspaceSection = document.getElementById('workspace');
+              if (workspaceSection) {
+                  workspaceSection.scrollIntoView({ behavior: 'smooth' });
+              }
+          });
+      }
+  });
+  </script>
+</body>
+</html>
