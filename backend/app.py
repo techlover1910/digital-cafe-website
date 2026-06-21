@@ -16,7 +16,9 @@ except Exception:
 
 app = Flask(__name__)
 CORS(app)
-
+@app.route("/")
+def home():
+    return "Digital Cafe Website Running"
 # Production-ready limits and settings
 app.config['MAX_CONTENT_LENGTH'] = int(os.environ.get('MAX_CONTENT_LENGTH', 10 * 1024 * 1024))  # 10 MB default
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "webp"}
