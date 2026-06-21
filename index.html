@@ -134,10 +134,20 @@
             <h3>Passport Photo Maker</h3>
             <form id="passport-form" class="tool-form" data-result="passport-result">
               <input type="file" id="passport-input" name="image" accept="image/*" required />
-              <select id="passport-count" name="count">
-                <option value="6">6 Photos</option>
-                <option value="12">12 Photos</option>
+              <label for="passport-format">Output Type</label>
+              <select id="passport-format" name="format">
+                <option value="jpg" selected>JPG</option>
+                <option value="pdf">PDF</option>
               </select>
+              <label for="passport-sheet">Sheet / Layout</label>
+              <select id="passport-sheet" name="sheet">
+                <option value="">Single</option>
+                <option value="6">6-up sheet</option>
+                <option value="12">12-up sheet</option>
+                <option value="4x6">4x6 layout</option>
+                <option value="a4">A4 layout</option>
+              </select>
+              <label style="display:block; font-size:0.9rem; margin-bottom:8px;"><input type="checkbox" id="passport-single-download" name="single_download" value="1"> Direct single download</label>
               <button type="submit">Process Photo</button>
             </form>
             <div class="result-area" id="passport-result">
@@ -222,6 +232,10 @@
   <script src="frontend.js"></script>
   <script>
   document.addEventListener('DOMContentLoaded', () => {
+      // Determine backend base URL: fall back to localhost:5000 when opened locally
+      const API_BASE = (window.location.protocol === 'file:' || !window.location.hostname)
+          ? 'http://localhost:5000'
+          : window.location.origin;
       
       // 1. Passport photo form ko backend se connect karna
       const passportForm = document.getElementById('passport-form');
@@ -232,40 +246,67 @@
               const submitBtn = passportForm.querySelector('button');
               const resultArea = document.getElementById('passport-result');
               const fileInput = document.getElementById('passport-input');
-              const countSelect = document.getElementById('passport-count');
 
               if (!fileInput.files[0]) {
                   alert("कृपया पहले 'Choose File' पर क्लिक करके एक फोटो सेलेक्ट करें!");
                   return;
               }
 
+              const formatSelect = document.getElementById('passport-format');
+              const sheetSelect = document.getElementById('passport-sheet');
+              const singleCheckbox = document.getElementById('passport-single-download');
+
               const formData = new FormData();
               formData.append('image', fileInput.files[0]);
-              formData.append('count', countSelect.value);
+              formData.append('format', formatSelect.value);
+              if (sheetSelect.value) formData.append('sheet', sheetSelect.value);
+              formData.append('dpi', '300');
+              formData.append('download', singleCheckbox.checked ? 'single' : 'zip');
 
               try {
                   submitBtn.innerText = "Processing (कृपया रुकें)...";
                   submitBtn.disabled = true;
                   resultArea.innerHTML = `<p style="color: #eab308; font-weight: bold; padding: 10px;">⏳ फोटो क्रॉप हो रही है, कृपया इंतजार करें...</p>`;
 
-                  const response = await fetch('/api/passport-photo', {
+                    const response = await fetch(`${API_BASE}/process-photo`, {
                       method: 'POST',
                       body: formData
-                  });
+                    });
 
-                  if (!response.ok) throw new Error("सर्वर से गड़बड़ रिस्पॉन्स मिला");
+                    if (!response.ok) throw new Error("सर्वर से गड़बड़ रिस्पॉन्स मिला");
 
-                  const blob = await response.blob();
-                  const imgUrl = URL.createObjectURL(blob);
+                    const contentType = response.headers.get('content-type') || '';
+                    const blob = await response.blob();
+                    const url = URL.createObjectURL(blob);
 
-                  resultArea.innerHTML = `
-                      <div style="margin-top: 15px; text-align: center; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #cbd5e1;">
-                          <p style="color: #22c55e; font-weight: bold; margin-bottom: 10px;">✓ Output Grid Ready!</p>
-                          <img src="${imgUrl}" style="max-width: 100%; border: 2px solid #cbd5e1; border-radius: 8px; margin-bottom: 12px;">
+                    if (contentType.includes('application/zip')) {
+                      resultArea.innerHTML = `
+                        <div style="margin-top: 15px; text-align: center; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #cbd5e1;">
+                          <p style="color: #22c55e; font-weight: bold; margin-bottom: 10px;">✓ Outputs Ready!</p>
+                          <a href="${url}" download="passport_outputs.zip" style="background: #22c55e; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: bold; width: 100%; text-align: center;">Download ZIP</a>
+                        </div>
+                      `;
+                    } else if (contentType.includes('application/pdf')) {
+                      resultArea.innerHTML = `
+                        <div style="margin-top: 15px; text-align: center; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #cbd5e1;">
+                          <p style="color: #22c55e; font-weight: bold; margin-bottom: 10px;">✓ PDF Ready!</p>
+                          <iframe src="${url}" style="width:100%;height:220px;border:2px solid #cbd5e1;border-radius:6px;margin-bottom:10px;"></iframe>
                           <br>
-                          <a href="${imgUrl}" download="passport_grid.png" style="background: #22c55e; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: bold; width: 100%; text-align: center;">Download 6/12 Grid</a>
-                      </div>
-                  `;
+                          <a href="${url}" download="passport.pdf" style="background: #22c55e; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: bold; width: 100%; text-align: center;">Download PDF</a>
+                        </div>
+                      `;
+                    } else if (contentType.includes('image')) {
+                      resultArea.innerHTML = `
+                        <div style="margin-top: 15px; text-align: center; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #cbd5e1;">
+                          <p style="color: #22c55e; font-weight: bold; margin-bottom: 10px;">✓ Image Ready!</p>
+                          <img src="${url}" style="max-width: 100%; border: 2px solid #cbd5e1; border-radius: 8px; margin-bottom: 12px;">
+                          <br>
+                          <a href="${url}" download="passport.jpg" style="background: #22c55e; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: bold; width: 100%; text-align: center;">Download</a>
+                        </div>
+                      `;
+                    } else {
+                      resultArea.innerHTML = `<p style="color: #ef4444; font-weight: bold; padding: 10px;">❌ Unknown response type: ${contentType}</p>`;
+                    }
 
               } catch (err) {
                   alert("कनेक्शन एरर: चेक करें कि टर्मिनल में 'python app.py' (Port 5000) चल रहा है या नहीं।");
@@ -303,7 +344,7 @@
                   submitBtn.disabled = true;
                   resultArea.innerHTML = `<p style="color: #eab308; font-weight: bold; padding: 10px;">⏳ फाइल convert हो रही है...</p>`;
 
-                  const response = await fetch('/api/convert', {
+                  const response = await fetch(`${API_BASE}/api/convert`, {
                       method: 'POST',
                       body: formData
                   });
@@ -379,7 +420,7 @@
                   submitBtn.disabled = true;
                   resultArea.innerHTML = `<p style="color: #eab308; font-weight: bold; padding: 10px;">⏳ इमेज resize हो रही है...</p>`;
 
-                  const response = await fetch('/api/resize', {
+                  const response = await fetch(`${API_BASE}/api/resize`, {
                       method: 'POST',
                       body: formData
                   });

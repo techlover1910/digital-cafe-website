@@ -130,3 +130,38 @@ digital-cafe-website/
 ✓ Responsive Design
 ✓ Hindi Support
 ```
+
+---
+
+## 🔁 Deploying & Frontend API URL
+
+- When you deploy the backend to a live host (Render, Heroku, etc.), update the frontend to point to the live backend.
+- Open [index.html](index.html) and locate the `API_BASE` constant in the script at the bottom. Replace the fallback or set it explicitly, for example:
+
+```js
+const API_BASE = 'https://your-live-backend.example.com';
+```
+
+- Alternatively, if you serve the frontend from the same domain as the backend, `window.location.origin` will be used automatically.
+
+---
+
+## 🔧 Render Deployment Notes
+
+- Add the repository to Render and set the build command to:
+
+```bash
+pip install -r backend/requirements.txt
+```
+
+- Set the start command to:
+
+```bash
+gunicorn backend.app:app --bind 0.0.0.0:$PORT --workers 4 --timeout 120
+```
+
+- Set environment variables:
+    - `PORT` (Render sets this automatically)
+    - `MAX_CONTENT_LENGTH` (optional, bytes)
+    - `FLASK_DEBUG=0` for production
+
